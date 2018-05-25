@@ -1,10 +1,20 @@
 //Require the express package and use express.Router()
 const express = require('express');
 const router = express.Router();
+const bucketlist = require('../models/List');
 
 //GET HTTP method to /bucketlist
 router.get('/', (req, res) => {
-    res.send("GET");
+    bucketlist.getAllLists((err, lists) => {
+        if (err) {
+            res.json({ success: false, message: `Failed to load all lists. Error: ${err}` });
+        }
+        else {
+            res.write(JSON.stringify({ success: true, lists: lists }, null, 2));
+            res.end();
+
+        }
+    });
 });
 
 //POST HTTP method to /bucketlist

@@ -12,3 +12,5 @@ const BucketlistSchema = mongoose.Schema({
         enum: ['High', 'Normal', 'Low']
     }
 });
+
+const BucketList = module.exports = mongoose.model('BucketList', BucketlistSchema );
